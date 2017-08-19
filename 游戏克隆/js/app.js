@@ -18,17 +18,11 @@ Enemy.prototype.update = function(dt) {
     }else{                     // 都是以同样的速度运行的
         this.x=0;
     }
+//console.log(this.x ,  this.y);
 };
 
 
-//此为游戏的碰撞检测
-Enemy.prototype.checkCollision = function (player){
-    if(this.y==player.y){
-    player.y=400;
-    }else{
-    }
 
-};
 
 
 
@@ -41,15 +35,27 @@ Enemy.prototype.render = function() {
 var Player=function(x,y){
     this.x=x;
     this.y=y;
-    this.superman='images/char-boy.png';
+    this.sprite='images/char-boy.png';
 };
 // 这个类需要一个 update() 函数， render() 函数和一个 handleInput()函数
+
+var count=0;
 Player.prototype.update=function(dt){
-    // 你应该给每一次的移动都乘以 dt 参数，以此来保证游戏在所有的电脑上
-    // 都是以同样的速度运行的
+    if(this.y === -28||this.y === -11){
+    count++;
+    if(count==66){
+        this.x = 200;
+        this.y = 404;
+    }
+        console.log(count);
+    }
+    if(this.x == 200&&this.y == 404){
+        count=0;
+    }
+    //console.log(this.x,this.y)
 };
 Player.prototype.render=function(){
-    ctx.drawImage(Resources.get(this.superman), this.x, this.y);
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 Player.prototype.handleInput=function(movement){
         switch (movement){
@@ -65,9 +71,10 @@ Player.prototype.handleInput=function(movement){
 
             case'up':
                 if(this.y>0){
-                    this.y -=83 ;
-                    if(this.y<-20){
-                        this.y=400;
+                    if(this.y==-95){
+                        this.y=320;
+                    }else{
+                        this.y -=83;
                     }
                 }break;
 
@@ -79,20 +86,29 @@ Player.prototype.handleInput=function(movement){
         }
 
 };
+//此为游戏的碰撞检测
+Player.prototype.checkCollisions= function(){
+    for( var i=0;i<allEnemies.length;i++){
+        if(this.y==allEnemies[i].y){
+            if(Math.abs(this.x-allEnemies[i].x)<40){
+
+                this.x = 202;
+                this.y = 404;
+            }
+        }
+    }
+
+};
 
 // 现在实例化你的所有对象
 var allEnemies=[
-    new Enemy(22, 83 * 0 + 55, 20), new Enemy(21, 83 * 0 + 55, 23), // row 1
+    new Enemy(22, 83 * 0 + 55, 10) , new Enemy(21, 83 * 0 + 55, 23), // row 1
     new Enemy(57, 83 * 1 + 55, 29), new Enemy(20, 83 * 1 + 55, 29), // row 2
     new Enemy(22, 83 * 2 + 55, 50), new Enemy(59, 83 * 2 + 55, 50),  // row 3
  ];// 把所有敌人的对象都放进一个叫 allEnemies 的数组里面
-var player=new Player(101, 83 * 3 + 55);// 把玩家对象放进一个叫 player 的变量里面
-for(var i=0;i<allEnemies.length;i++){
-    allEnemies[i].checkCollision(player);
-}
+var player=new Player(202, 404);// 把玩家对象放进一个叫 player 的变量里面
 
-
-
+//83 * 3+55
 
 
 
@@ -112,3 +128,6 @@ document.addEventListener('keyup', function(e) {
 
     player.handleInput(allowedKeys[e.keyCode]);
 });
+
+
+
