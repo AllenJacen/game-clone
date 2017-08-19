@@ -41,15 +41,15 @@ var Player=function(x,y){
 
 var count=0;
 Player.prototype.update=function(dt){
-    if(this.y === -28||this.y === -11){
+    if(this.y === -13){
     count++;
     if(count==66){
-        this.x = 200;
-        this.y = 404;
+        this.x = 202;
+        this.y = 83*4+70;
     }
         console.log(count);
     }
-    if(this.x == 200&&this.y == 404){
+    if(this.x == 202&&this.y == 83*4+70){
         count=0;
     }
     //console.log(this.x,this.y)
@@ -93,7 +93,7 @@ Player.prototype.checkCollisions= function(){
             if(Math.abs(this.x-allEnemies[i].x)<40){
 
                 this.x = 202;
-                this.y = 404;
+                this.y = 83*4+70;
             }
         }
     }
@@ -102,11 +102,13 @@ Player.prototype.checkCollisions= function(){
 
 // 现在实例化你的所有对象
 var allEnemies=[
-    new Enemy(22, 83 * 0 + 55, 10) , new Enemy(21, 83 * 0 + 55, 23), // row 1
-    new Enemy(57, 83 * 1 + 55, 29), new Enemy(20, 83 * 1 + 55, 29), // row 2
-    new Enemy(22, 83 * 2 + 55, 50), new Enemy(59, 83 * 2 + 55, 50),  // row 3
- ];// 把所有敌人的对象都放进一个叫 allEnemies 的数组里面
-var player=new Player(202, 404);// 把玩家对象放进一个叫 player 的变量里面
+        new Enemy(22, 83 * 0 + 70, 30) , new Enemy(21, 83 * 0 + 70, 23), // row 1
+        new Enemy(57, 83 * 1 + 70, 29), new Enemy(20, 83 * 1 + 70, 29), // row 2
+        new Enemy(22, 83 * 2 +70, 50), new Enemy(59, 83 * 2 + 70, 50),  // row 3
+        new Enemy(22, 83 * 3 +70, 60), new Enemy(59, 83 * 3 + 70, 20)  // row 4
+];
+ // 把所有敌人的对象都放进一个叫 allEnemies 的数组里面
+var player=new Player(202, 83*4+70);// 把玩家对象放进一个叫 player 的变量里面
 
 //83 * 3+55
 

@@ -68,7 +68,7 @@ var Engine = (function(global) {
          checkCollisions();
     }
     function  checkCollisions(){
-            Player.checkCollisions();
+            player.checkCollisions();
 
     }
     /* 这个函数会遍历在 app.js 定义的存放所有敌人实例的数组，并且调用他们的 update()
@@ -94,7 +94,7 @@ var Engine = (function(global) {
                 'images/stone-block.png',   // 第一行石头
                 'images/stone-block.png',   // 第二行石头
                 'images/stone-block.png',   // 第三行石头
-                'images/grass-block.png',   // 第一行草地
+                'images/stone-block.png',   // 第一行草地
                 'images/grass-block.png'    // 第二行草地
             ],
             numRows = 6,
